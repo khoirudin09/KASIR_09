@@ -1,71 +1,101 @@
-total = []
-print("............................................")
-print("              Kasir Swalayan UDP            ")
-print("............................................")
+print("--------------- WARUNG MAKAN PAK UDIN ---------------")
+pembeli = input("Masukkan nama Pembeli: ")
 
+def tampilkan_menu_makanan():
+    print("\n----------------- Menu -----------------")
+    print("1. MIE BAKSO - Rp 12000")
+    print("2. MIE AYAM - Rp 11000")
+    print("3. MIE AYAM GORENG - Rp 10000")
+    print("4. MIE AYAM BAKSO - Rp 20000")
+    print("5. KWETIAU - Rp 18000")
 
-# fungsi untuk menambah barang
-def tanya():
+def tampilkan_menu_minuman():
+    print("\n----------------- Menu Minuman -----------------")
+    print("1. Teh Hangat - Rp 3000")
+    print("2. Es teh - Rp 3000")
+    print("3. Es jeruk - Rp 5000")
+
+def fungsimakanan():
+    tampilkan_menu_makanan()
     while True:
-        print("\n-----------------------------------")
-        tanya = input("Ingin tambah barang? [y/t]   : ")
-        print("-------------------------------------")
-        if tanya.lower() == 'y': # penggunaan {.lower} berguna mengubah huruf apapun menjadi kecil
-            daftar_barang()
-        elif tanya.lower() == 't':
-            akhir()
+        try:
+            nomor = int(input("Masukan Pilihan: "))
+            if nomor not in range(1, 6):
+                raise ValueError("Pilihan tidak ada, silahkan masukan lagi!!")
             break
-        else:
-            print("Input tidak valid, silakan masukkan 'y' untuk ya atau 't' untuk tidak.")
+        except ValueError as e:
+            print(e)
 
-# fungsi menampilkan barang
-def daftar_barang():
-    print("NO | Nama Barang | Harga")
-    print("============================================")
-    print("1  | beras/kg    | 12100")
-    print("2  | tempe       | 5000")
-    print("3  | garam halus | 2000")
-    print("____________________________________________")
+    porsi = int(input("Berapa Porsi: "))
+    if nomor == 1:
+        totalmakan = porsi * 12000
+        makan = "MIE BAKSO"
+    elif nomor == 2:
+        totalmakan = porsi * 11000
+        makan = "MIE AYAM"
+    elif nomor == 3:
+        totalmakan = porsi * 10000
+        makan = "MIE AYAM GORENG"
+    elif nomor == 4:
+        totalmakan = porsi * 20000
+        makan = "MIE AYAM BAKSO"
+    elif nomor == 5:
+        totalmakan = porsi * 18000
+        makan = "KWETIAU"
+    
+    print(f"{porsi} porsi {makan} = Rp {totalmakan}")
+    return totalmakan, porsi, makan
 
-    kode = int(input("Masukkan angka barang: "))
-    if kode == 1:
-        jumlah1 = int(input("Masukkan jumlah barang: "))
-        total1 = 12100 * jumlah1
-        total.append(total1)
-    elif kode == 2:
-        jumlah2 = int(input("Masukkan jumlah barang: "))
-        total2 = 5000 * jumlah2
-        total.append(total2)
-    elif kode == 3:
-        jumlah3 = int(input("Masukkan jumlah barang: "))
-        total3 = 2000 * jumlah3
-        total.append(total3)
-    else:
-        print("Kode barang tidak valid, silakan coba lagi.")
+def fungsiminuman():
+    tampilkan_menu_minuman()
+    while True:
+        try:
+            nomor = int(input("Masukan Pilihan: "))
+            if nomor not in range(1, 4):
+                raise ValueError("Pilihan tidak ada, silahkan masukan lagi!!")
+            break
+        except ValueError as e:
+            print(e)
 
-# fungsi penotalan barang dan diskon
-def akhir():
-    if total:
-        print("Sub Total    : ", sum(total)) # fungsi sum yaitu menjumlahkan semua yang ada dalam variable sum
-        diskon = 0
-        a = sum(total)
-        if a > 500000:
-            diskon = a * 8 / 100
-        elif a > 300000:
-            diskon = a * 5 / 100
-        print("Potongan Harga : ", diskon)
-        totalakhir = a - diskon
-        print("Total          : ", totalakhir)
-        print("----------------------------------------------")
-        bayar = int(input("Bayar          : "))
-        kembalian = bayar - totalakhir
-        print("Kembalian      : ", kembalian)
-        print("----------------------------------------------")
-        print("------------->   Terima Kasih   <-------------")
-        print("----------------------------------------------")
-    else:
-        print("Tidak ada barang yang dibeli.")
+    gelas = int(input("Berapa Gelas: "))
+    if nomor == 1:
+        totalminum = gelas * 3000
+        minum = "Teh Hangat"
+    elif nomor == 2:
+        totalminum = gelas * 3000
+        minum = "Es Teh"
+    elif nomor == 3:
+        totalminum = gelas * 5000
+        minum = "Es Jeruk"
+    
+    print(f"{gelas} gelas {minum} = Rp {totalminum}")
+    return totalminum, gelas, minum
 
-# Memulai program dengan memanggil fungsi untuk pertama kaliF
-daftar_barang()
-tanya()
+totalmakan, porsi, makan = fungsimakanan()
+totalminum, gelas, minum = fungsiminuman()
+totalsemua = totalmakan + totalminum
+
+print("\nTotal harus Dibayar: Rp", totalsemua)
+while True:
+    try:
+        uang = int(input("Uang Tunai Pembeli: Rp "))
+        if uang < totalsemua:
+            raise ValueError("Uang tidak cukup. Silakan masukkan jumlah yang sesuai.")
+        break
+    except ValueError as e:
+        print(e)
+
+kembalian = uang - totalsemua
+print("Kembalian: Rp", kembalian)
+
+print("\n=====================================")
+print("========== STRUK PEMBAYARAN =========")
+print("=====================================")
+print("Nama\t\t:", pembeli)
+print("Beli\t\t:", porsi, makan, "( Rp", totalmakan, ")")
+print("\t\t ", gelas, minum, "( Rp", totalminum, ")")
+print("Tagihan\t\t: Rp", totalsemua)
+print("Dibayar\t\t: Rp", uang)
+print("Kembalian\t: Rp", kembalian)
+print("=====================================")
+print("=====================================")
