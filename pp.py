@@ -1,4 +1,8 @@
+print("=====================================================")
+print("----------------------WELCOME TO---------------------")
+print("=====================================================")
 print("--------------- WARUNG MAKAN PAK UDIN ---------------")
+print("=====================================================")
 pembeli = input("Masukkan nama Pembeli: ")
 
 def tampilkan_menu_makanan():
@@ -11,9 +15,11 @@ def tampilkan_menu_makanan():
 
 def tampilkan_menu_minuman():
     print("\n----------------- Menu Minuman -----------------")
-    print("1. Teh Hangat - Rp 3000")
-    print("2. Es teh - Rp 3000")
-    print("3. Es jeruk - Rp 5000")
+    print("1. TEH HANGAT - Rp 3000")
+    print("2. ES TEH - Rp 3000")
+    print("3. ES JERUK - Rp 5000")
+    print("4. ES MILO - Rp 6000")
+    print("5. AIR ES - Rp 1000")
 
 def fungsimakanan():
     tampilkan_menu_makanan()
@@ -60,17 +66,23 @@ def fungsiminuman():
     gelas = int(input("Berapa Gelas: "))
     if nomor == 1:
         totalminum = gelas * 3000
-        minum = "Teh Hangat"
+        minum = "TEH HANGAT"
     elif nomor == 2:
         totalminum = gelas * 3000
-        minum = "Es Teh"
+        minum = "ES TEH"
     elif nomor == 3:
         totalminum = gelas * 5000
-        minum = "Es Jeruk"
+        minum = "ES JERUK"
+    elif nomor == 4:
+        totalminum = gelas * 6000
+        minum = "ES MILO"
+    elif nomor == 5:
+        totalminum = gelas * 1000
+        minum = "AIR ES"
     
     print(f"{gelas} gelas {minum} = Rp {totalminum}")
     return totalminum, gelas, minum
-
+            
 totalmakan, porsi, makan = fungsimakanan()
 totalminum, gelas, minum = fungsiminuman()
 totalsemua = totalmakan + totalminum
