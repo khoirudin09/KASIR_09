@@ -1,4 +1,4 @@
-print("--------------- WARUNG MAKAN PAK UDIN ---------------")
+print("--------------- WARUNG MAKAN PAK UDIN ---------------")###########
 pembeli = input("Masukkan nama Pembeli: ")
 
 def tampilkan_menu_makanan():
